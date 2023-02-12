@@ -17,7 +17,7 @@ const getLocationById = async (locationId) => {
   try {
     const location = await Location.findByPk(locationId);
     if (!location) {
-      throw new AppError(401, "Location not found");
+      throw new AppError(404, "Location not found");
     }
 
     return location;
@@ -39,7 +39,7 @@ const updateLocation = async (locationId, data) => {
   try {
     const location = await Location.findByPk(locationId);
     if (!location) {
-      throw new AppError(401, "Location not found");
+      throw new AppError(404, "Location not found");
     }
 
     await Location.update(data, {
@@ -60,7 +60,7 @@ const deleteLocation = async (locationId) => {
   try {
     const location = await Location.findByPk(locationId);
     if (!location) {
-      throw new AppError(401, "Location not found");
+      throw new AppError(404, "Location not found");
     }
 
     await Location.destroy({ where: { locationId } });
@@ -81,12 +81,12 @@ const searchLocation = async (searchTerm) => {
 
 const uploadImage = async (locationId, file) => {
   if (!file) {
-    throw new AppError(401, "Please upload file");
+    throw new AppError(400, "Please upload file");
   }
 
   const location = await Location.findByPk(locationId);
   if (!location) {
-    throw new AppError(400, "Location not found");
+    throw new AppError(404, "Location not found");
   }
 
   const url = `${configs.URL}/${file.path}`;

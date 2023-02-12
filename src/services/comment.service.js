@@ -11,6 +11,19 @@ const getComments = async () => {
   }
 };
 
+const getCommentById = async (commentId) => {
+  try {
+    const comment = await Comment.findByPk(commentId);
+    if (!comment) {
+      throw new AppError(404, "Comment not found");
+    }
+
+    return comment;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getCommentByUser = async (userId) => {
   try {
     const user = await User.findByPk(userId);
@@ -108,6 +121,7 @@ const deleteComment = async (commentId) => {
 
 module.exports = {
   getComments,
+  getCommentById,
   getCommentByUser,
   getCommentByRoom,
   createComment,

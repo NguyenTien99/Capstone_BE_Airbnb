@@ -13,6 +13,20 @@ const getBookings = () => {
   };
 };
 
+const getBookingById = () => {
+  return async (req, res, next) => {
+    try {
+      const { bookingId } = req.params;
+
+      const booking = await bookingService.getBookingById(bookingId);
+
+      res.status(200).json(response(booking));
+    } catch (error) {
+      next(error);
+    }
+  };
+};
+
 const getBookingByUser = () => {
   return async (req, res, next) => {
     try {
@@ -85,6 +99,7 @@ const deleteBooking = () => {
 
 module.exports = {
   getBookings,
+  getBookingById,
   getBookingByUser,
   getBookingByRoom,
   createBooking,

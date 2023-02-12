@@ -20,7 +20,7 @@ const getRoomById = async (roomId) => {
       include: "owner",
     });
     if (!room) {
-      throw new AppError(400, "Room not found");
+      throw new AppError(404, "Room not found");
     }
 
     return room;
@@ -34,7 +34,7 @@ const searchRoomsByLocationId = async (locationId) => {
   try {
     const location = await Location.findByPk(locationId);
     if (!location) {
-      throw new AppError(400, "Location not found");
+      throw new AppError(404, "Location not found");
     }
 
     const rooms = await Room.findAll({
@@ -51,12 +51,12 @@ const createRoom = async (data) => {
   try {
     const user = await User.findByPk(data.userId);
     if (!user) {
-      throw new AppError(400, "User not found");
+      throw new AppError(404, "User not found");
     }
 
     const location = await Location.findByPk(data.locationId);
     if (!location) {
-      throw new AppError(400, "Location not found");
+      throw new AppError(404, "Location not found");
     }
 
     const room = await Room.create(data);
@@ -70,7 +70,7 @@ const updateRoom = async (roomId, data) => {
   try {
     const room = await Room.findByPk(roomId);
     if (!room) {
-      throw new AppError(400, "Room not found");
+      throw new AppError(404, "Room not found");
     }
 
     await Room.update(data, { where: { roomId } });
@@ -87,7 +87,7 @@ const deleteRoom = async (roomId) => {
   try {
     const room = await Room.findByPk(roomId);
     if (!room) {
-      throw new AppError(400, "Room not found");
+      throw new AppError(404, "Room not found");
     }
 
     await Room.destroy({ where: { roomId } });
@@ -99,12 +99,12 @@ const deleteRoom = async (roomId) => {
 const uploadImage = async (roomId, file) => {
   try {
     if (!file) {
-      throw new AppError(400, "Please upload a file");
+      throw new AppError(404, "Please upload a file");
     }
 
     const room = await Room.findByPk(roomId);
     if (!room) {
-      throw new AppError(400, "Room not found");
+      throw new AppError(404, "Room not found");
     }
 
     const url = `${configs.URL}/${file.path}`;

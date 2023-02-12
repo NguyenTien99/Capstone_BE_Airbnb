@@ -18,7 +18,7 @@ const getUserById = async (userId) => {
     const user = await User.findOne({ where: { userId } });
 
     if (!user) {
-      throw new AppError(400, "User not found");
+      throw new AppError(404, "User not found");
     }
 
     return user;
@@ -60,7 +60,7 @@ const updateUser = async (userId, data) => {
     });
 
     if (!user) {
-      throw new AppError(401, "User not found");
+      throw new AppError(404, "User not found");
     }
 
     await User.update(data, {
@@ -86,7 +86,7 @@ const deleteUser = async (userId) => {
     const user = await User.findByPk(userId);
 
     if (!user) {
-      throw new AppError(401, "User not found");
+      throw new AppError(404, "User not found");
     }
 
     await User.destroy({ where: { userId } });
@@ -108,14 +108,14 @@ const searchUser = async (searchTerm) => {
 const uploadAvatar = async (userId, file) => {
   try {
     if (!file) {
-      throw new AppError(401, "Please upload file");
+      throw new AppError(400, "Please upload file");
     }
 
     const url = `${configs.URL}/${file.path}`;
 
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new AppError(401, "User not found");
+      throw new AppError(404, "User not found");
     }
 
     await User.update({ ...user, avatar: url }, { where: { userId } });

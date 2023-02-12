@@ -13,6 +13,20 @@ const getComments = () => {
   };
 };
 
+const getCommentById = () => {
+  return async (req, res, next) => {
+    try {
+      const { commentId } = req.params;
+
+      const comment = await commentService.getCommentById(commentId);
+
+      res.status(200).json(response(comment));
+    } catch (error) {
+      next(error);
+    }
+  };
+};
+
 const getCommentByUser = () => {
   return async (req, res, next) => {
     try {
@@ -85,6 +99,7 @@ const deleteComment = () => {
 
 module.exports = {
   getComments,
+  getCommentById,
   getCommentByUser,
   getCommentByRoom,
   createComment,

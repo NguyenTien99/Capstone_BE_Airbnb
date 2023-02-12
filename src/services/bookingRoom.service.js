@@ -10,6 +10,19 @@ const getBookings = async () => {
   }
 };
 
+const getBookingById = async (bookingId) => {
+  try {
+    const booking = await BookingRoom.findByPk(bookingId);
+    if (!booking) {
+      throw new AppError(404, "Booking not found");
+    }
+
+    return booking;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getBookingByUser = async (userId) => {
   try {
     const user = await User.findByPk(userId);
@@ -122,6 +135,7 @@ const deleteBooking = async (bookingId) => {
 
 module.exports = {
   getBookings,
+  getBookingById,
   getBookingByUser,
   getBookingByRoom,
   createBooking,
