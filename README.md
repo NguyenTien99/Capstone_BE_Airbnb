@@ -1,5 +1,6 @@
 - Nhóm 11: Nguyễn Minh Tiến - Trần Lê Tuấn Anh
 - Project: Airbnb
+- Link deploy: capstonebeairbnb-production.up.railway.app
 - Link source: https://github.com/NguyenTien99/Capstone_BE_Airbnb
 - Link youtube: https://www.youtube.com/watch?v=jqbP3yphYOU
 - Link phân chia công việc: https://docs.google.com/spreadsheets/d/1-cRYIYT-RrHaFDuUYhQL7A-akaPnp6r4DaFuFh27Ce0/edit?usp=sharing
