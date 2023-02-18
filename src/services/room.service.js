@@ -17,7 +17,7 @@ const getRoomById = async (roomId) => {
   try {
     const room = await Room.findOne({
       where: { roomId },
-      include: "owner",
+      include: ["owner", "location"],
     });
     if (!room) {
       throw new AppError(404, "Room not found");

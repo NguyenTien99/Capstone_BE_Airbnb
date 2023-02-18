@@ -106,7 +106,8 @@ const updateBooking = async (bookingId, data) => {
     const roomBooking = await BookingRoom.findOne({
       where: { roomId: data.roomId },
     });
-    if (roomBooking) {
+
+    if (roomBooking && booking.roomId !== data.roomId) {
       throw new AppError(400, "Room is renting");
     }
 
